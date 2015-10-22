@@ -1,13 +1,9 @@
 body {
-	
+	font-family: Cabin, sans-serif;
 }
 
 h1 {
 	color: green;
-}
-
-#log {
-    
 }
 
 #galleryWrapper {
@@ -34,36 +30,62 @@ h1 {
 	width: 20%;
 	height: 100%;
 	position: relative;
+    
+    float: left;
+    display: inline;
+    
+    background-position: center;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.articleHide .articleTextWrapper {
+    opacity: 0.0;
+}
+
+.articleShow .articleTextWrapper {
+    opacity: 1.0;
+}
+
+.articleTextWrapper {
+    bottom: 0px;
+    left: 0px;
+    height: auto;
+    background-color: rgba(204,0,0,0.90);
+    position:absolute;
+    
+    padding: 10px 10px 10px 10px;
 }
 
 .article h1 {
-	
+    font-family: 'Cabin Condensed';
+	color: white;
+    margin: 0px;
+    font-size: 25px;
+    font-weight: 400;
 }
 
-.article:hover {
-    
+.article h2 {
+    margin: 0px;
+    color: #111;
+    font-size: 17px;
+    font-weight: 400;
 }
 
 #leftArticle {
-	float: left;
-	display: inline-block;
-	background-color: #955BA1;
+    background-color: purple;
 }
 
-#centerArticle {
-	float: left;
-	display: inline-block;
-	background-color: #18BF93;
+#centreArticle {
+    background-color: green;
 }
 
 #rightArticle {
-	float: left;
-	display: inline-block;
-	background-color: #89CA3E;
+    background-color: yellow;
 }
 
 /*For all mobile devices*/
-@media (max-width: 600px){
+@media (max-width: 700px){
 	#galleryWrapper {
         left: 0px !important;
         margin-left: 0px !important;
@@ -72,11 +94,11 @@ h1 {
 }
 
 /*For tablets*/
-@media (min-width: 300px) and (max-width: 600px){
+@media (min-width: 350px) and (max-width: 700px){
 
 }
 
 /*For phones*/
-@media (max-width: 300px){
+@media (max-width: 350px){
 
 }

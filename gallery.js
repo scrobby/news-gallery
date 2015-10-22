@@ -1,42 +1,68 @@
 // JavaScript Document
 
-print("Hello");
+//set global variables
+var animationTime = 500;
 
-var articles = $( ".article" );
+//calculate the widths based on the number of articles
+var articles = $( ".article", "#galleryWrapper" );
 var numberOfArticles = articles.length;
 
-print(numberOfArticles);
-
 var galleryWidth = $( "#galleryWrapper" ).width();
-
-print(galleryWidth);
 
 var openWidth = galleryWidth * 0.6;
 var closedWidth = (galleryWidth * 0.4) / (numberOfArticles - 1);
 
-print ("Open width: " + openWidth + " | Closed width: " + closedWidth);
 
-for (var i = 0; i < numberOfArticles; i++) {
-    print("Run: " + i);
-    if (i == 0) {
-        $( articles[i] ).width(openWidth);
-    } else {
-        $( articles[i] ).width(closedWidth);
+//set the widths of the article text wrappers and move them off screen
+updateArticleTextWrapperWidth();
+
+//show the left hand article
+showArticle(articles[0], false);
+$( ".articleTextWrapper" ).css("bottom", "-300px");
+
+//set up response to mouse over
+$( ".article", "#galleryWrapper" ).mouseenter(function() {
+    showArticle(this, true);
+});
+
+
+//handle which article to show
+function showArticle(articleToShow, animated) {
+    var aTime = animationTime;
+    
+    if (!animated) {
+        aTime = 1;
+    }
+    
+    for (var i = 0; i < numberOfArticles; i++) {
+        var currentArticle = articles[i];
+        var currentTextWrapper = $( currentArticle ).find( ".articleTextWrapper" );
+        var textWrapperHeight = $( currentTextWrapper ).height() + 20;
+        
+        //open the article hovered over and close the others
+        if (currentArticle == articleToShow) {
+            $( currentArticle ).animate({
+                width: openWidth
+                }, aTime);
+            $( currentTextWrapper ).animate({
+                bottom: 0
+                }, aTime);
+        } else {
+            $( currentArticle ).animate({
+                width: closedWidth
+                }, aTime);
+            $( currentTextWrapper ).animate({
+                bottom: -textWrapperHeight
+                }, aTime);
+        }
     }
 }
 
-$( ".article" ).mouseover(function() {
-    $( this ).width(openWidth);
-    
-    for (var i = 0; i < numberOfArticles; i++) {
-        print("Try: " + i);
-        
-        if (articles[i] != this) {
-            print("Is not the same!");
-            $( articles[i] ).width(closedWidth);
-        }
-    }
-});
+
+//article text wrapper width
+function updateArticleTextWrapperWidth() {
+    $( ".articleTextWrapper" ).width(openWidth);
+}
 
 function print(theLog) {
     $( '#log' ).append(theLog + "<br>");
